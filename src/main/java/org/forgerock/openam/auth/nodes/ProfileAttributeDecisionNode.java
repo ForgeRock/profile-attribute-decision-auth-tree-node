@@ -101,7 +101,7 @@ public class ProfileAttributeDecisionNode implements Node {
                     
 
                     //Check the attribute value found matches submitted
-                    if(attr == config.profileAttributeValue()) {
+                    if(attr.equals(config.profileAttributeValue())) {
 
                         debug.message("[" + DEBUG_FILE + "]: " + "Found attribute value and matches submitted value");
                         return goTo("True").build();
