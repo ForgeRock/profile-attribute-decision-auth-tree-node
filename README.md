@@ -13,7 +13,7 @@
  *
  * Copyright 2017 ForgeRock AS.
 -->
-# Profile Attribute Decision Authentication Node
+# Profile Attribute Decision Authentication Tree Node
 
 A simple authentication node for ForgeRock's [Identity Platform][forgerock_platform] 5.5 and above. This node retrieves a single user profile attribute and compares to the submitted value.
 

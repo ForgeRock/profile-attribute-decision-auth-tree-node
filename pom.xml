@@ -22,7 +22,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>profile-attribute-decision-node</artifactId>
+    <artifactId>profile-attribute-decision-auth-tree-node</artifactId>
     <groupId>org.forgerock.am</groupId>
     <version>5.5.0</version>
     <name>Profile Attribute Decision Authentication Node</name>
