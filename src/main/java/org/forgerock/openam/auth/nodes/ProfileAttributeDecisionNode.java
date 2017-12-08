@@ -64,13 +64,12 @@ public class ProfileAttributeDecisionNode implements Node {
 
         //Property to search for
         @Attribute(order = 100)
-        default String profileAttribute() {
-            return "Name of profile attribute";
+        default String profileAttribute() {return "";
         }
 
         @Attribute(order = 200)
         default String profileAttributeValue() {
-            return "Value of attribute";
+            return "";
         }
 
 
@@ -104,10 +103,10 @@ public class ProfileAttributeDecisionNode implements Node {
 
                 Set<String> idAttrs = userIdentity.getAttribute(config.profileAttribute());
 
-                if (idAttrs == null || idAttrs.isEmpty()) {
+                if (idAttrs == null || idAttrs.isEmpty() ) {
 
-                    debug.error("[" + DEBUG_FILE + "]: " + "Unable to find attribute value for: " + config.profileAttribute());
-                    
+                    debug.error("[" + DEBUG_FILE + "]: " + "Unable to find attribute " + config.profileAttribute() + "on user profile");
+                    return goTo("Empty").build();
 
                 } else {
 
@@ -119,12 +118,12 @@ public class ProfileAttributeDecisionNode implements Node {
                     if(attr.equals(config.profileAttributeValue())) {
 
                         debug.message("[" + DEBUG_FILE + "]: " + "Found attribute value and matches submitted value");
-                        return goTo("True").build();
+                        return goTo("Match").build();
 
                     } else {
 
                         debug.message("[" + DEBUG_FILE + "]: " + "Found attribute but value doesn't match submitted value");
-                        return goTo("False").build();
+                        return goTo("noMatch").build();
 
                     }
 
@@ -141,7 +140,7 @@ public class ProfileAttributeDecisionNode implements Node {
 
         
         //No match found outcome
-        return goTo("False").build();
+        return goTo("noMatch").build();
 
     }
 
@@ -156,8 +155,9 @@ public class ProfileAttributeDecisionNode implements Node {
         public List<Outcome> getOutcomes(PreferredLocales locales, JsonValue nodeAttributes) {
             ResourceBundle bundle = locales.getBundleInPreferredLocale(BUNDLE, OutcomeProvider.class.getClassLoader());
             return ImmutableList.of(
-            new Outcome("True", bundle.getString("True")),
-            new Outcome("False", bundle.getString("False")));
+                    new Outcome( "Empty", bundle.getString("Empty")),
+                    new Outcome("Match", bundle.getString("Match")),
+                    new Outcome("noMatch", bundle.getString("noMatch")));
         }
     }
 }
