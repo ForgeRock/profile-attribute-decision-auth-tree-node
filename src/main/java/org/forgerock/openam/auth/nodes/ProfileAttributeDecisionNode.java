@@ -43,17 +43,12 @@ import org.forgerock.guava.common.collect.ImmutableList;
 import org.forgerock.json.JsonValue;
 import org.forgerock.util.i18n.PreferredLocales;
 
-
-
-
-
-
-
 @Node.Metadata(outcomeProvider = ProfileAttributeDecisionNode.OutcomeProvider.class,
         configClass = ProfileAttributeDecisionNode.Config.class)
 public class ProfileAttributeDecisionNode implements Node {
 
     private final static String DEBUG_FILE = "ProfileAttributeDecisionNode";
+    private static final String INPUT = "mail";
     protected Debug debug = Debug.getInstance(DEBUG_FILE);
     private final CoreWrapper coreWrapper;
 
@@ -93,8 +88,12 @@ public class ProfileAttributeDecisionNode implements Node {
    
         debug.message("[" + DEBUG_FILE + "]: " + "Starting");    
 
-        //Pull out the user object
-        AMIdentity userIdentity = coreWrapper.getIdentity(context.sharedState.get(USERNAME).asString(),context.sharedState.get(REALM).asString());
+        // Pull out the user object
+        // Query on different attributes
+        Set<String> userAttributes = new HashSet<>();
+        userAttributes.add("uid");
+        userAttributes.add("mail");
+        AMIdentity userIdentity = IdUtils.getIdentity(context.sharedState.get(INPUT).asString(), context.sharedState.get(REALM).asString(), userAttributes);
 
         //Pull out the specified attribute
         debug.message("[" + DEBUG_FILE + "]: Looking for profile attribute " + config.profileAttribute());

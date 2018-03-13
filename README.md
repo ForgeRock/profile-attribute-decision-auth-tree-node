@@ -30,6 +30,9 @@ value: the string to compare the profile attribute to (empty string will return 
 The code in this repository has binary dependencies that live in the ForgeRock maven repository. Maven can be configured to authenticate to this repository by following the following [ForgeRock Knowledge Base Article](https://backstage.forgerock.com/knowledge/kb/article/a74096897).
 
 Edit the necessary ProfileAttributeDecisionNode.java as appropriate.  To rebuild, run "mvn clean install" in the directory containing the pom.xml  
+## Notes
+* The node will check against uid and mail user attributes
+
 
 ![ScreenShot](./profile-decision.png)  
 
