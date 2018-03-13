@@ -1,0 +1,13 @@
+*.zip
+*.war
+staging/
+tmp/
+*.iml
+logs/
+target/
+*.DS_Store
+.idea/
+*.tgz
+/helm/git/secrets/ssh
+/helm/git/secrets/ssh.pub
+bazel-*
